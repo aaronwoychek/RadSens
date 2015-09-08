@@ -6,10 +6,8 @@
 //
 //Requires libmariadbclient bcm2835
 //compile with
-// gcc -o rPiRx rPiRx.c nrf24l01/nrf24.c nrf24l01/radioPinFunctions.c 
--l 
-bcm2835
-// sudo ./main
+// gcc -o rPiRx rPiRx.c nrf24l01/nrf24.c nrf24l01/radioPinFunctions.c -l bcm2835 -l mysqlclient
+// sudo ./rPiRx
 
 
 /*
