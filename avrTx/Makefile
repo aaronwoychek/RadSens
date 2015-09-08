@@ -8,7 +8,7 @@ avrTx.hex: avrTx.elf
 
 avrTx.elf: avrTx.o nrf24.o radioPinFunctions.o
 
-	avr-gcc -mmcu=attiny2313 -Os -o avrTx.elf avrTx.o nrf24.o radioPinFunctions.o
+	avr-gcc -o avrTx.elf avrTx.o nrf24.o radioPinFunctions.o
 
 avrTx.o: avrTx.c
 
@@ -16,7 +16,7 @@ avrTx.o: avrTx.c
 
 nrf24.o: nrf24/nrf24.c
 
-	avr-gcc -mmcu=attiny2313 -Os -c -I/nrf24 nrf24/nrf24.c
+	avr-gcc -mmcu=attiny2313 -Os -c nrf24/nrf24.c
 
 radioPinFunctions.o: nrf24/radioPinFunctions.c
 
