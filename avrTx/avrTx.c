@@ -6,7 +6,7 @@
  */ 
 
 #define F_CPU 1000000UL
-#define deviceID 0x0F
+#define deviceID 0x17
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -70,7 +70,7 @@ int main(){
 	data_array[0] = deviceID;
 	data_array[1] = 0xAA;
 	
-	DDRA |= _BV(DDA1);
+	DDRA |= _BV(PA1);		//This should technially be DDA1
 	
 	while(1){
 		data_array[3] = events;
