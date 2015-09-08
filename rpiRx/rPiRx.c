@@ -6,7 +6,7 @@
 //
 //Requires libmariadbclient bcm2835
 //compile with
-// gcc -o rPiRx rPiRx.c nrf24l01/nrf24.c nrf24l01/radioPinFunctions.c -l bcm2835 -l mysqlclient
+// gcc -o rPiRx rPiRx.c nrf24/nrf24.c nrf24/radioPinFunctions.c -l bcm2835 -l mysqlclient
 // sudo ./rPiRx
 
 
@@ -42,7 +42,7 @@ MariaDB [mysql]> SET PASSWORD FOR 'sawaiz'@'%' =PASSWORD('Guilty343');
 #include <stdio.h>
 #include <stdint.h>
 #include <mysql/mysql.h>
-#include "nrf24l01/nrf24.h"
+#include "nrf24/nrf24.h"
 
 #define DATABASE_NAME		"gieger"
 #define DATABASE_USERNAME	"sawaiz"
