@@ -45,9 +45,9 @@ MariaDB [mysql]> SET PASSWORD FOR 'sawaiz'@'%' =PASSWORD('Guilty343');
 #include "nrf24/nrf24.h"
 
 #define DATABASE_NAME		"gieger"
-#define DATABASE_USERNAME	"sawaiz"
-#define DATABASE_PASSWORD	"Guilty343"
-#define DATABASE_URL	"45.56.114.100"
+#define DATABASE_USERNAME	"gieger"
+#define DATABASE_PASSWORD	"alligator123"
+#define DATABASE_URL		"127.0.0.0"
 MYSQL *mysql1;
 
 void mysql_connect(void)
