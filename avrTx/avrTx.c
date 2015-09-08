@@ -1,8 +1,8 @@
 /*
- * _1975_Greifswald.c
+ * avrTx.c
  *
  * Created: 07/17/14 23:03:39
- *  Author: Sawaiz
+ *  Author: Sawaiz, aaron
  */ 
 
 #define F_CPU 1000000UL
@@ -11,7 +11,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#include "nrf24.h"
+#include "nrf24/nrf24.h"
 
 uint16_t events = 0;
 uint8_t data_array[4];
@@ -42,11 +42,11 @@ void pwm_init(){
 }
 
 void interupt_init(){
-	GIMSK = 1 << INT0; 			// Enable INT0
+	GIMSK = 1 << INT0; 		// Enable INT0
 	MCUCR |= 0 << ISC00;		// Trigger INT0 on low level
 	MCUCR |= 0 << ISC01;
 	DDRD |= 0 << PORTD2;		//Make Sure its an input as well.
-	sei();						//enable global interrupts
+	sei();				//enable global interrupts
 }
 
 int main(){
@@ -63,7 +63,7 @@ int main(){
 	nrf24_tx_address(tx_address);
 	nrf24_rx_address(rx_address);
 	
-	pwm_init();				// initialize timer in PWM mode
+	pwm_init();			// initialize timer in PWM mode
 	interupt_init();		//initalize Interrupt 0
 	
 	/* Fill the data buffer */
