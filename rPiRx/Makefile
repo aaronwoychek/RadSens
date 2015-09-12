@@ -13,4 +13,4 @@ nrf24.o:
 	gcc -c ./nrf24/nrf24.c
 
 clean:
-	rm rPiRx nrf24.o rPiRx.o radioPinFunctions.o
+	rm -f rPiRx nrf24.o rPiRx.o radioPinFunctions.o
