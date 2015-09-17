@@ -113,20 +113,22 @@ int main(int argc, char **argv){
  printf("Configured\n");
 
  while (1){
-  if (nrf24_dataReady())
-  {
+  if (nrf24_dataReady()) {
    nrf24_getData(data_array);
    printf("> %d %d %d %d \n",
     data_array[0],
     data_array[1],
     data_array[2],
     data_array[3]);
-
-   writeCpm(
-    data_array[0],
-    data_array[1],
-    data_array[2],
-    data_array[3]);
+  if (argc>1) {
+   if (argv[1][0]=='1') {
+    writeCpm(
+     data_array[0],
+     data_array[1],
+     data_array[2],
+     data_array[3]);
+    }
+   }
   }
  }
  mysql_disconnect();
