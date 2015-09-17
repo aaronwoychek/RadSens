@@ -75,6 +75,6 @@ int main() {
   }
 
   ledPort ^= _BV(ledPin);
-  _delay_ms(1000);
+  _delay_ms(80000);
  }
 }

@@ -10,7 +10,7 @@ LFUSE = 0xE4
 HFUSE = 0xDF
 EFUSE = 0xFF
 
-PROGRAMMER_TYPE = usbtiny
+PROGRAMMER_TYPE = atmelice_isp
 PROGRAMMER_ARGS =
 # extra arguments to avrdude: baud rate, chip type, -F flag, etc.
 
