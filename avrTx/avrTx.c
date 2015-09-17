@@ -3,7 +3,7 @@
  *
  * Created: 07/17/14 23:03:39
  *  Author: Sawaiz, aaron
- */ 
+ */
 
 #define F_CPU 1000000UL
 #define deviceID 0x17
@@ -34,11 +34,11 @@ void pwm_init(){
 	TCCR0B |= (1<<CS00);
 	TCCR0B |= (0<<CS01);
 	TCCR0B |= (0<<CS02);
-	
+
 	// make sure to make OC0 as output pin
 	DDRB |= (1<<PORTB2);
-	
-	OCR0A = 125; //Set to 400V
+
+	OCR0A = 127; //Set to 400V
 }
 
 void interupt_init(){
@@ -52,36 +52,36 @@ void interupt_init(){
 int main(){
 	DDRB |= 1<<PORTB3;
 	PORTB |= 1<<PORTB3;
-	
+
 	/* init hardware pins */
 	nrf24_init();
-	
+
 	/* Channel #2 , payload length: 4 */
 	nrf24_config(2,4);
 
 	/* Set the device addresses */
 	nrf24_tx_address(tx_address);
 	nrf24_rx_address(rx_address);
-	
+
 	pwm_init();			// initialize timer in PWM mode
 	interupt_init();		//initalize Interrupt 0
-	
+
 	/* Fill the data buffer */
 	data_array[0] = deviceID;
 	data_array[1] = 0xAA;
-	
+
 	DDRA |= _BV(PA1);		//This should technially be DDA1
-	
+
 	while(1){
 		data_array[3] = events;
 		data_array[2] = events >> 8;
 		nrf24_send(data_array);
-		
+
 // 		/* Wait for transmission to end */
  		while(nrf24_isSending());
-		
+
 		PORTA ^= _BV(PA1);
-		
+
 		_delay_ms(1000);
 	}
 }
