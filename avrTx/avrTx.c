@@ -20,68 +20,68 @@ uint8_t rx_address[5] = {0xE7,0xE7,0xE7,0xE7,0xE7};
 
 ISR(INT0_vect)
 {
-	cli();
-	PORTB ^= 1<<PORTB3;
-	while (!(PIND & 1<<PIND2)){
-	}
-	events++;
-	sei();
+ cli();
+ PORTB ^= 1<<PORTB3;
+ while (!(PIND & 1<<PIND2)){
+ }
+ events++;
+ sei();
 }
 
 void pwm_init(){
-	// initialize TCCR0 as per requirement, say as follows
-	TCCR0A |= (1<<WGM00)|(1<<COM0A1)|(1<<WGM01);
-	TCCR0B |= (1<<CS00);
-	TCCR0B |= (0<<CS01);
-	TCCR0B |= (0<<CS02);
+ // initialize TCCR0 as per requirement, say as follows
+ TCCR0A |= (1<<WGM00)|(1<<COM0A1)|(1<<WGM01);
+ TCCR0B |= (1<<CS00);
+ TCCR0B |= (0<<CS01);
+ TCCR0B |= (0<<CS02);
 
-	// make sure to make OC0 as output pin
-	DDRB |= (1<<PORTB2);
+ // make sure to make OC0 as output pin
+ DDRB |= (1<<PORTB2);
 
-	OCR0A = 127; //Set to 400V
+ OCR0A = 127; //Set to 400V
 }
 
 void interupt_init(){
-	GIMSK = 1 << INT0; 		// Enable INT0
-	MCUCR |= 0 << ISC00;		// Trigger INT0 on low level
-	MCUCR |= 0 << ISC01;
-	DDRD |= 0 << PORTD2;		//Make Sure its an input as well.
-	sei();				//enable global interrupts
+ GIMSK = 1 << INT0;   // Enable INT0
+ MCUCR |= 0 << ISC00;  // Trigger INT0 on low level
+ MCUCR |= 0 << ISC01;
+ DDRD |= 0 << PORTD2;  //Make Sure its an input as well.
+ sei();    //enable global interrupts
 }
 
 int main(){
-	DDRB |= 1<<PORTB3;
-	PORTB |= 1<<PORTB3;
+ DDRB |= 1<<PORTB3;
+ PORTB |= 1<<PORTB3;
 
-	/* init hardware pins */
-	nrf24_init();
+ /* init hardware pins */
+ nrf24_init();
 
-	/* Channel #2 , payload length: 4 */
-	nrf24_config(2,4);
+ /* Channel #2 , payload length: 4 */
+ nrf24_config(2,4);
 
-	/* Set the device addresses */
-	nrf24_tx_address(tx_address);
-	nrf24_rx_address(rx_address);
+ /* Set the device addresses */
+ nrf24_tx_address(tx_address);
+ nrf24_rx_address(rx_address);
 
-	pwm_init();			// initialize timer in PWM mode
-	interupt_init();		//initalize Interrupt 0
+ pwm_init();   // initialize timer in PWM mode
+ interupt_init();  //initalize Interrupt 0
 
-	/* Fill the data buffer */
-	data_array[0] = deviceID;
-	data_array[1] = 0xAA;
+ /* Fill the data buffer */
+ data_array[0] = deviceID;
+ data_array[1] = 0xAA;
 
-	DDRA |= _BV(PA1);		//This should technially be DDA1
+ DDRA |= _BV(PA1);  //This should technially be DDA1
 
-	while(1){
-		data_array[3] = events;
-		data_array[2] = events >> 8;
-		nrf24_send(data_array);
+ while(1){
+  data_array[3] = events;
+  data_array[2] = events >> 8;
+  nrf24_send(data_array);
 
-// 		/* Wait for transmission to end */
- 		while(nrf24_isSending());
+//   /* Wait for transmission to end */
+   while(nrf24_isSending());
 
-		PORTA ^= _BV(PA1);
+  PORTA ^= _BV(PA1);
 
-		_delay_ms(1000);
-	}
+  _delay_ms(1000);
+ }
 }
