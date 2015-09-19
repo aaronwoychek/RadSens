@@ -6,8 +6,8 @@
 #include <avr/interrupt.h>
 #include "nrf24/nrf24.h"
 
-#define deviceID 0x10
-#define ledPin PIND5
+#define deviceID 0x11
+#define ledPin PIND3
 #define ledPort DDRD
 
 uint16_t events = 0;
@@ -74,7 +74,9 @@ int main() {
   while(nrf24_isSending()) {
   }
 
-  ledPort ^= _BV(ledPin);
-  _delay_ms(80000);
+  ledPort &= ~_BV(ledPin);
+  events = 0;
+  _delay_ms(1000);
+  ledPort |= _BV(ledPin);
  }
 }
