@@ -1,5 +1,5 @@
 //rPiRx.c
-//Sawaiz Syed
+//Sawaiz Syed, Aaron Woychek
 //Take data from NRF Module, and display
 //Send data to SQL database
 //
@@ -44,10 +44,10 @@ MariaDB [mysql]> SET PASSWORD FOR 'sawaiz'@'%' =PASSWORD('Guilty343');
 #include <mysql/mysql.h>
 #include "nrf24/nrf24.h"
 
-#define DATABASE_NAME		"gieger"
-#define DATABASE_USERNAME	"gieger"
+#define DATABASE_NAME		"geiger"
+#define DATABASE_USERNAME	"geiger"
 #define DATABASE_PASSWORD	"alligator123"
-#define DATABASE_URL		"127.0.0.0"
+#define DATABASE_URL		"localhost"
 MYSQL *mysql1;
 
 void mysql_connect(void)

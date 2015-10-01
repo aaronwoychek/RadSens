@@ -6,7 +6,7 @@
 #include <avr/interrupt.h>
 #include "nrf24/nrf24.h"
 
-#define deviceID 0x11
+#define deviceID 0x33
 #define ledPin PIND3
 #define ledPort DDRD
 
